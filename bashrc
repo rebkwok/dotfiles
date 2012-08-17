@@ -10,6 +10,10 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+if [ -f ~/.local.sh ]; then
+	. ~/.local.sh
+fi
+
 # Set a prompt that goes red when logged-in as root:
 SEQ="\[\033["
 END="\]"
