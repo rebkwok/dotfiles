@@ -17,7 +17,7 @@
 
 " Number of spaces that a pre-existing tab is equal to.
 " For the amount of space used for a new tab use shiftwidth.
-au BufRead,BufNewFile *py,*pyw,*.c,*.h set tabstop=8
+au BufRead,BufNewFile *py,*pyw,*.c,*.h set tabstop=4
 
 " What to use for an indent.
 " This will affect Ctrl-T and 'autoindent'.
@@ -72,6 +72,7 @@ au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 " to meet coding standards, they are helpful.
 
 " Set the default file encoding to UTF-8: ``set encoding=utf-8``
+set encoding=utf-8
 
 " Puts a marker at the beginning of the file to differentiate between UTF and
 " UCS encoding (WARNING: can trick shells into thinking a text file is actually
@@ -80,8 +81,12 @@ au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 " For full syntax highlighting:
 "``let python_highlight_all=1``
 "``syntax on``
+let python_highlight_all=1
+syntax on
 
 " Automatically indent based on file type: ``filetype indent on``
 " Keep indentation level from previous line: ``set autoindent``
+set autoindent
 
 " Folding based on indentation: ``set foldmethod=indent``
+set foldmethod=indent
