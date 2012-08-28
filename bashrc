@@ -25,3 +25,15 @@ END="\]"
 # PROMPT_COMMAND=un_color
 export PS1="[${SEQ}\$(if [[ \`whoami\` == 'root' ]]; then echo -n '31;1m'; else echo -n '0m'; fi;)${END}\u${SEQ}0m${END}@${SEQ}1;33m${END}\h${SEQ}0m${END} ${SEQ}1;35m${END}\w${SEQ}0m${END}]$ "
 
+# Bash options:
+if [[ $SHELL == *bash ]]; then
+    shopt -s globstar extglob autocd nocaseglob
+fi
+
+# Aliases:
+alias grep="grep --color"
+alias ll="ls -l"
+alias la="ls -a"
+alias lla="ls -la"
+alias ..="cd .."
+alias ...="cd ../.."
