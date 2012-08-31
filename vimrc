@@ -1,11 +1,5 @@
 " vimrc file for following the coding standards specified in PEP 7 & 8.
-"
-" To use this file, source it in your own personal .vimrc file (``source
-" <filename>``) or, if you don't have a .vimrc file, you can just symlink to it
-" (``ln -s <this file> ~/.vimrc``).  All options are protected by autocmds
-" (read below for an explanation of the command) so blind sourcing of this file
-" is safe and will not affect your settings for non-Python or non-C files.
-"
+call pathogen#infect()
 "
 " All setting are protected by 'au' ('autocmd') statements.  Only files ending
 " in .py or .pyw will trigger the Python settings while files ending in *.c or
@@ -84,9 +78,9 @@ set encoding=utf-8
 let python_highlight_all=1
 syntax on
 
-" Automatically indent based on file type: ``filetype indent on``
-" Keep indentation level from previous line: ``set autoindent``
-set autoindent
+
+filetype indent on
 
 " Folding based on indentation: ``set foldmethod=indent``
-set foldmethod=indent
+" set foldmethod=indent
+
