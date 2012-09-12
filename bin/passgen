@@ -1,0 +1,151 @@
+#!/usr/bin/env python2.5
+# -*- coding: utf-8 -*-
+
+""" Generate random passwords using the platform's built-in random
+number generator."""
+
+
+import math
+import optparse
+import random
+import sys
+
+
+__all__ = ['validate_pattern', 'generate_password', 'entropy',
+           'CHARACTER_POOLS']
+
+
+class InvalidCharacterError(Exception):
+    """This exception is raised when an invalid character is found in a provided
+    password pattern."""
+    pass
+
+
+class CharacterClass(object):
+    def __init__(self, characters, name, description=None):
+        self.characters = characters
+        self.name = name
+        self.description = description
+        self.entropy = math.log(len(self.characters), 2)
+
+    def choice(self):
+        return random.choice(self.characters)
+
+
+class CharacterPool(object):
+    def __init__(self):
+        self._pool = {}
+
+    def add_class(self, pattern_chars, characters, name, description=None):
+        cc = CharacterClass(characters, name, description)
+        for char in pattern_chars:
+            self._pool[char] = cc
+
+    def choice(self, pattern_char):
+        return self._pool[pattern_char].choice()
+        
+    def validate_pattern(self, pattern):
+        """Validate the provided pattern string to ensure that all characters
+        are valid.
+        """
+        for p_char in pattern:
+            if p_char not in self._pool:
+                raise InvalidCharacterError(
+                        "The pattern character '%s' is invalid!" % p_char)
+
+    def calculate_entropy(self, pattern):
+        """ Calculates the entropy of the password (assuming the pattern is unknown),
+        using the formula documented at:
+            http://www.redkestrel.co.uk/Articles/RandomPasswordStrength.html
+        """
+        #unique_characters = set(''.join([CHARACTER_POOLS[p] for p in pattern]))
+        #return len(pattern) * math.log(len(unique_characters), 2)
+        return sum([self._pool[p].entropy for p in pattern])
+
+    def random_pattern(length=8, keys='a'):
+        """ Generates a random pattern with the provided length from the keys
+        provided."""
+        return ''.join([random.choice(keys) for counter in range(length)])
+
+    @property
+    def pattern_chars(self):
+        return self._pool.keys()
+
+PUNCTUATION = r"!@#$%^&*<>,.+(){}?=/\|:;_-~ "
+CAPITAL_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+LOWER_LETTERS = "abcdefghijklmnopqrstuvwxyz"
+NUMBERS = "0123456789"
+
+pool = CharacterPool()
+pool.add_class('p$', PUNCTUATION, "punctuation")
+pool.add_class('U', CAPITAL_LETTERS, "capital letters")
+pool.add_class('L', CAPITAL_LETTERS + LOWER_LETTERS, "letters")
+pool.add_class('l', LOWER_LETTERS, "letters (lower-case)")
+pool.add_class('1dD', NUMBERS, "digits")
+pool.add_class('c', "bcdfghjklmnpqrstvwxyz", "consonants (lower-case)")
+pool.add_class('C', "BCDFGHJKLMNPQRSTVWXYZ", "consonants (upper-case)")
+pool.add_class('v', 'aeiou', "vowels (lower-case)")
+pool.add_class('V', 'AEIOU', "vowels (upper-case)")
+pool.add_class('w', CAPITAL_LETTERS + LOWER_LETTERS + NUMBERS,
+               "any alphanumeric")
+pool.add_class('a', CAPITAL_LETTERS + LOWER_LETTERS + NUMBERS + PUNCTUATION,
+               "any character")
+# 'Safe' chars are lists with similar chars removed, such as 'oO1I2Z' etc. This
+# is designed so that if a password is hand-written, it can be read back
+# without error:
+pool.add_class('S', "ABCDEFGHJKMNPQRSTUVWXY", "safe letters (upper-case)")
+pool.add_class('s', "abcdefghjkmnprstuvwxy", "safe letters (lower-case)")
+pool.add_class('2', "345678", "safe digits")
+# 'constants':
+pool.add_class('_', '_', "underscore")
+pool.add_class('-', '-', "hyphen")
+
+
+DEFAULT_PATTERN = "UUdddlll"
+
+
+def generate_password(pattern=DEFAULT_PATTERN):
+    """Generate and return a single password matching the provided pattern
+    string.
+    """
+    pool.validate_pattern(pattern)
+    return ''.join([pool.choice(p) for p in pattern])
+
+def random_pattern(length, letter):
+    return letter * length
+    
+def main(argv=sys.argv[1:]):
+    """Parse user command line, and print out the specified number of matching
+    generated passwords.
+    """
+    optp = optparse.OptionParser("""%prog [-n count] [-p pattern]
+    or %prog [-n count] -r -l length""",
+                               description=__doc__)
+    optp.add_option('-n', '--number', type='int', default=1,
+          help="number of passwords to generate")
+    optp.add_option('-p', '--pattern', default=None,
+          help="pattern of the password to generate. Valid pattern characters"
+          " are: '%s'. [Default: %s]"
+          % (''.join(sorted(pool.pattern_chars)), DEFAULT_PATTERN))
+    optp.add_option('-r', '--random', action='store_true', default=False,
+          help="Generate a random pattern for each password")
+    optp.add_option('-l', '--length', action='store', type='int', default=8,
+          help="""The length of the pattern used if a random password pattern is
+          generated [%default]""")
+    options, args = optp.parse_args(argv)
+   
+    if options.pattern is None:
+        pattern = DEFAULT_PATTERN
+    else:
+        pattern = options.pattern
+    
+    # pylint: disable-msg=W0612
+    for i in range(options.number):
+        if options.random:
+            pattern = random_pattern(options.length, options.pattern or 'a')
+        password = generate_password(pattern=pattern)
+        entropy = pool.calculate_entropy(pattern=pattern)
+        print "Password: %s\tEntropy: %.2f bits" % (password, entropy)
+
+if __name__ == '__main__':
+    main()
