@@ -27,3 +27,5 @@ pip-log.txt
 
 # Vim bundles:
 vim/bundle/*
+
+.DS_Store
