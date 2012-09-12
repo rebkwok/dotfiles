@@ -61,6 +61,8 @@ au BufRead,BufNewFile *.c,*.h set formatoptions-=c formatoptions-=o formatoption
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 
 
+au BufRead,BufNewFile *.coffee set ts=4 sw=4 expandtab smartindent
+au BufRead,BufNewFile *.js set ts=4 sw=4 expandtab smartindent
 " ----------------------------------------------------------------------------
 " The following section contains suggested settings.  While in no way required
 " to meet coding standards, they are helpful.
@@ -83,4 +85,5 @@ filetype indent on
 
 " Folding based on indentation: ``set foldmethod=indent``
 " set foldmethod=indent
+
 
