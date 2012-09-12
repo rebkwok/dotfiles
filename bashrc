@@ -1,10 +1,10 @@
 # .bashrc
-echo bashrc
+#echo bashrc
 
 PATH=$PATH:$HOME/bin
 export PATH
 
-source .dotfiles/lib/detect.sh
+source ~/.dotfiles/lib/detect.sh
 
 OS=`cur_os`
 
@@ -16,6 +16,11 @@ fi
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
+fi
+
+if [ -f /etc/bash.bashrc ]; then
+    echo bash.bashrc
+    . /etc/bash.bashrc
 fi
 
 if [ -f ~/.local.sh ]; then
@@ -55,6 +60,9 @@ alias lla="ls -la"
 alias ..="cd .."
 alias ...="cd ../.."
 
+if [[ $(which ack-grep) ]]; then
+    alias ack='ack-grep'
+fi
 # Find a file with a pattern in name:
 function ff() { find . -type f -iname '*'$*'*' -ls ; }
 
