@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ $1 ]; then
+    if [ -f $1 ]; then
+        id_file=$1
+        for host in `sed -n 's/Host \(.*\)/\1/p' ~/.ssh/config`; do
+            ssh-copy-id -i $id_file $host
+        done
+    else
+        echo 'The specified id file does not exist!'
+        exit 2
+    fi
+else
+    echo 'Must supply an id file to distribute!'
+    exit 1
+fi
