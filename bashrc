@@ -1,5 +1,9 @@
 # .bashrc
 
+source .dotfiles/lib/detect.sh
+
+OS=`cur_os`
+
 if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
     return
@@ -27,14 +31,94 @@ export PS1="[${SEQ}\$(if [[ \`whoami\` == 'root' ]]; then echo -n '31;1m'; else 
 
 # Bash options:
 if [[ $SHELL == *bash ]]; then
-    shopt -s globstar extglob autocd nocaseglob
+	if [[ $OS ==  "osx" ]]; then
+		shopt -s extglob nocaseglob
+	else
+		shopt -s globstar extglob autocd nocaseglob
+	fi
 fi
 
 # Aliases:
 alias grep="grep --color"
-alias ls="ls --color=auto"
+if [[ $OS ==  "osx" ]]; then
+	alias ls="ls -G"
+else
+	alias ls="ls --color=auto"
+fi
 alias ll="ls -l"
 alias la="ls -a"
 alias lla="ls -la"
 alias ..="cd .."
 alias ...="cd ../.."
+
+# Find a file with a pattern in name:
+function ff() { find . -type f -iname '*'$*'*' -ls ; }
+
+# Alias mvim to gvim
+if [ -f /usr/local/bin/mvim ]; then
+	alias gvim=mvim
+fi
+
+if [ $OS == "osx" ]; then
+	# Mac utility functions:
+
+	# posd - output the dir of the forefront finder window
+	function posd() {
+	thePath="$( osascript<<END
+	try
+	tell application "Finder" to set the source_folder to (folder of the front window) as alias
+	on error -- no open folder windows
+	set the source_folder to path to desktop folder as alias
+	end try
+
+	set thePath to (POSIX path of the source_folder as string)
+	set result to thePath
+END
+	)"
+
+
+
+	if [[ -n "${thePath%/*}" ]]; then
+
+		if [[ -d "$thePath" ]]; then
+			echo "${thePath%/}"
+		else 
+			echo "${thePath%/*}"
+		fi
+	else 
+		echo "/" 
+	fi 
+}
+
+# CD to the foreground finder window directory:
+function cdf {
+cd "$(posd)"
+pwd
+	}
+
+	# Change foreground directory to current dir:
+	function fdc {
+	if [ -n "$1" ]; then
+		if [ "${1%%/*}" = "" ]; then
+			thePath="$1"
+		else
+			thePath=`pwd`"/$1"
+		fi
+	else
+		thePath=`pwd`
+	fi
+
+	osascript<<END
+	set myPath to ( POSIX file "$thePath" as alias )
+	try
+	tell application "Finder" to set the (folder of the front window) to myPath
+	on error -- no open folder windows
+	tell application "Finder" to open myPath
+	end try
+END
+	}
+
+	# Change both pwd and foreground finder window to dir:
+	function cdd { command cd "$@" ; ( fdc >|/dev/null & ) }
+	  
+fi
