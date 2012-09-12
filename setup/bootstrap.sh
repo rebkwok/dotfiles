@@ -32,7 +32,6 @@ function cur_os {
 }
 
 OS=`cur_os`
-echo $OS; exit
 
 if [[ "$OS" == "debian" ]]
 then
