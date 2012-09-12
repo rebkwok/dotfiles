@@ -1,4 +1,8 @@
 # .bashrc
+echo bashrc
+
+PATH=$PATH:$HOME/bin
+export PATH
 
 source .dotfiles/lib/detect.sh
 
