@@ -18,8 +18,8 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+# Ubuntu:
 if [ -f /etc/bash.bashrc ]; then
-    echo bash.bashrc
     . /etc/bash.bashrc
 fi
 
@@ -60,6 +60,7 @@ alias lla="ls -la"
 alias ..="cd .."
 alias ...="cd ../.."
 
+<<<<<<< HEAD
 if [[ $(which ack-grep) ]]; then
     alias ack='ack-grep'
 fi
@@ -162,3 +163,6 @@ END
     # Git autocomplete:
     [ -f /usr/local/git/contrib/completion/git-completion.bash ] && . /usr/local/git/contrib/completion/git-completion.bash
 fi
+=======
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+>>>>>>> Minor changes based on Ubuntu environment.
