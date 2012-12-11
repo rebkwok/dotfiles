@@ -69,12 +69,13 @@ function ff() { find . -type f -iname '*'$*'*' -ls ; }
 # Import dev and devhome commands:
 source ~/.dotfiles/lib/dev_support.sh
 
-# Alias mvim to gvim
-if [ -f /usr/local/bin/mvim ]; then
-    alias gvim=mvim
-fi
 
 if [ $OS == "osx" ]; then
+    # Alias mvim to gvim
+    if [ $(which mvim) ]; then
+        alias gvim=mvim
+    fi
+
     # Mac utility functions:
 
     # posd - output the dir of the forefront finder window
