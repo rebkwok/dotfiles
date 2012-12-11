@@ -1,7 +1,7 @@
 # .bashrc
-#echo bashrc
 
-PATH=$PATH:$HOME/bin
+PATH=$HOME/bin:$PATH
+PATH=/usr/local/share/python:/usr/local/share/npm/bin:$PATH:
 export PATH
 
 source ~/.dotfiles/lib/detect.sh
@@ -158,6 +158,9 @@ END
 
     alias myip="ifconfig | egrep 'inet ' | sed -En '/inet 127/d;s/.* ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+) .*/\1/g;p'"
 
+    if [ -f `brew --prefix`/etc/bash_completion ]; then
+        . `brew --prefix`/etc/bash_completion
+    fi
 
     # Git autocomplete:
     [ -f /usr/local/git/contrib/completion/git-completion.bash ] && . /usr/local/git/contrib/completion/git-completion.bash
