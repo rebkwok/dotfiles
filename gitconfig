@@ -1,3 +1,5 @@
 [user]
 	name = Mark Smith
 	email = mark.smith@practicalpoetry.co.uk
+[push]
+	default = simple
