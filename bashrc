@@ -1,8 +1,11 @@
 # .bashrc
 
 PATH=$HOME/bin:$PATH
+PATH=/Users/mark.smith/.gem/ruby/1.8/bin:$PATH
 PATH=/usr/local/share/python:/usr/local/share/npm/bin:$PATH:
 export PATH
+
+export EDITOR=vim
 
 source ~/.dotfiles/lib/detect.sh
 
@@ -30,6 +33,10 @@ fi
 if [ -f ~/bin/fasd ]; then
     eval "$(~/bin/fasd --init auto)"
     alias v='f -e vim' # quick opening files with vim
+fi
+
+if [ -f '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' ]; then
+    alias browser='open -a "Google Chrome.app"'
 fi
 
 # Set a prompt that goes red when logged-in as root:

@@ -1,5 +1,17 @@
 [user]
 	name = Mark Smith
-	email = mark.smith@practicalpoetry.co.uk
+	email = mark.smith@rankinteractive.com
 [push]
 	default = simple
+[core]
+    editor = vim
+[web]
+    browser = chr
+[browser "chr"]
+	cmd = /usr/bin/open -a '/Applications/Google Chrome.app'
+[help]
+	format = web
+[color]
+	diff = auto
+	status = auto
+	branch = auto
