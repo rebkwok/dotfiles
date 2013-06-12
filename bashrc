@@ -67,6 +67,7 @@ alias la="ls -a"
 alias lla="ls -la"
 alias ..="cd .."
 alias ...="cd ../.."
+alias svnignore="svn propedit svn:ignore ."
 
 if [[ $(which ack-grep) ]]; then
     alias ack='ack-grep'
@@ -175,3 +176,4 @@ END
     [ -f /usr/local/git/contrib/completion/git-completion.bash ] && . /usr/local/git/contrib/completion/git-completion.bash
 fi
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+
