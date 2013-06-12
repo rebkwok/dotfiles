@@ -28,3 +28,4 @@ pip-log.txt
 .DS_Store
 .dev_activate
 bin/mvim
+*.swp
