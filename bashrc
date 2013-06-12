@@ -30,10 +30,10 @@ if [ -f ~/.local.sh ]; then
     . ~/.local.sh
 fi
 
-if [ -f ~/bin/fasd ]; then
-    eval "$(~/bin/fasd --init auto)"
-    alias v='f -e vim' # quick opening files with vim
-fi
+# if [ -f ~/bin/fasd ]; then
+#    eval "$(~/bin/fasd --init auto)"
+#    alias v='f -e vim' # quick opening files with vim
+# fi
 
 if [ -f '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' ]; then
     alias browser='open -a "Google Chrome.app"'
