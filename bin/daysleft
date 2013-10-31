@@ -1,0 +1,82 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import sys
+from datetime import datetime, date, time, timedelta
+
+
+def calculate_remaining(end, now=None):
+    if now is None:
+        now = datetime.now()
+    if isinstance(end, date):
+        end = datetime.combine(end, time(17))
+    if now > end:
+        return 0, 0, 0
+    end_date = end.date()
+
+    tally = 0
+    i = now.date()
+    while i < end_date:
+        i += timedelta(1)
+        if i.weekday() < 5:
+            tally += 1
+
+    remaining_days = tally if now.weekday() < 5 else 0
+    remaining_hours = (end - now).seconds // (60 * 60)
+    remaining_mins = ((end - now).seconds - (remaining_hours * (60 * 60))) / 60
+
+    return remaining_days, remaining_hours, remaining_mins
+
+
+def format_message(days, hours, mins):
+    ds = 'day' if days == 1 else 'days'
+    hs = 'hour' if hours == 1 else 'hours'
+    ms = 'min' if mins == 1 else 'mins'
+    if days == 0 and hours == 0 and mins == 0:
+        return "YOU'RE DONE!"
+    elif days == 0 and hours == 0:
+        return "You have {} {} remaining".format(mins, ms)
+    elif days == 0:
+        return "You have {} {} and {} {} remaining".format(hours, hs, mins, ms)
+    else:
+        return "You have {} working {}, {} {} and {} {} remaining".format(days, ds, hours, hs, mins, ms)
+
+
+import unittest
+
+
+class CalculationTestCase(unittest.TestCase):
+    def test_calculate_remaining(self):
+        self.assertEqual(calculate_remaining(date(2013, 11, 1), datetime(2013, 11, 1, 12)), (0, 5, 0))
+        self.assertEqual(calculate_remaining(date(2013, 11, 1), datetime(2013, 10, 31, 12)), (1, 5, 0))
+        self.assertEqual(calculate_remaining(date(2013, 11, 1), datetime(2013, 10, 30, 12)), (2, 5, 0))
+        # Friday - Monday
+        self.assertEqual(calculate_remaining(date(2013, 11, 4), datetime(2013, 11, 1, 12)), (1, 5, 0))
+        # Saturday - Monday
+        self.assertEqual(calculate_remaining(date(2013, 11, 4), datetime(2013, 11, 2, 12)), (0, 5, 0))
+        self.assertEqual(calculate_remaining(date(2013, 11, 4), datetime(2013, 11, 3, 12)), (0, 5, 0))
+        self.assertEqual(calculate_remaining(date(2013, 11, 4), datetime(2013, 12, 3, 12)), (0, 0, 0))
+
+    def test_format_message(self):
+        self.assertEqual(format_message(0, 0, 0), "YOU'RE DONE!")
+        self.assertEqual(format_message(1, 0, 0), "You have 1 working day, 0 hours and 0 mins remaining")
+        self.assertEqual(format_message(2, 0, 0), "You have 2 working days, 0 hours and 0 mins remaining")
+        self.assertEqual(format_message(1, 1, 0), "You have 1 working day, 1 hour and 0 mins remaining")
+        self.assertEqual(format_message(1, 2, 0), "You have 1 working day, 2 hours and 0 mins remaining")
+        self.assertEqual(format_message(1, 1, 1), "You have 1 working day, 1 hour and 1 min remaining")
+        self.assertEqual(format_message(1, 1, 2), "You have 1 working day, 1 hour and 2 mins remaining")
+        self.assertEqual(format_message(0, 1, 0), "You have 1 hour and 0 mins remaining")
+        self.assertEqual(format_message(0, 1, 1), "You have 1 hour and 1 min remaining")
+        self.assertEqual(format_message(0, 1, 2), "You have 1 hour and 2 mins remaining")
+        self.assertEqual(format_message(0, 0, 2), "You have 2 mins remaining")
+        self.assertEqual(format_message(0, 0, 0), "YOU'RE DONE!")
+
+
+def main(argv=sys.argv[1:]):
+    # unittest.main()
+    days, hours, mins = calculate_remaining(date(2013, 11, 15))
+    print format_message(days, hours, mins)
+
+
+if __name__ == '__main__':
+    main()
