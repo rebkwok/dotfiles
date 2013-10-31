@@ -68,6 +68,7 @@ alias lla="ls -la"
 alias ..="cd .."
 alias ...="cd ../.."
 alias svnignore="svn propedit svn:ignore ."
+alias curl_json="curl -H 'Accept: application/json'"
 
 if [[ $(which ack-grep) ]]; then
     alias ack='ack-grep'
@@ -175,5 +176,7 @@ END
     # Git autocomplete:
     [ -f /usr/local/git/contrib/completion/git-completion.bash ] && . /usr/local/git/contrib/completion/git-completion.bash
 fi
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Xmx1g'
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
