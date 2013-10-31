@@ -52,3 +52,5 @@ EOF
 syntax on                   " syntax highlighing
 filetype on                 " try to detect filetypes
 filetype plugin indent on   " enable loading indent file for filetype
+
+let g:pymode_folding = 0
