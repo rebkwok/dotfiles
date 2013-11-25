@@ -7,7 +7,7 @@ First check you have XCode and XCode command-line tools installed. Then...
 
 Install with::
 
-    curl https://raw.github.com/bedmondmark/dotfiles/master/setup/bootstrap.sh | bash
+    curl https://raw.github.com/bedmondmark/dotfiles/master/setup/bootstrap.sh | bash -x
 
 ToDo
 ----
