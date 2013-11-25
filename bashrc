@@ -178,5 +178,6 @@ END
 fi
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Xmx1g'
 
+source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
