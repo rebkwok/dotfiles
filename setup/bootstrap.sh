@@ -55,7 +55,7 @@ elif [[ "$OS" == "osx" ]]
 then
 	echo 'Going with a OSX-style install'
 	
-	ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go) \
+	ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go/install)" \
 	&& brew install git \
         && git clone git://github.com/bedmondmark/dotfiles.git ~/.dotfiles \
 	&& . ~/.dotfiles/setup/osx.sh \
