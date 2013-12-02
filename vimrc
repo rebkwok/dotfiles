@@ -54,3 +54,7 @@ filetype on                 " try to detect filetypes
 filetype plugin indent on   " enable loading indent file for filetype
 
 let g:pymode_folding = 0
+
+augroup filetypedetect
+    autocmd BufNew,BufNewFile,BufRead *.txt,*.text,*.md,*.markdown :setfiletype markdown
+augroup END
