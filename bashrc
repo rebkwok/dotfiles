@@ -181,3 +181,10 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Xmx1g'
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# Git aliases
+alias gadd='git add'
+alias gcom='git commit'
+alias gpul='git pull --rebase'
+alias gpus='git push'
+alias gl='git lg'
