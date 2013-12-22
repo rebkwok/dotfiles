@@ -1,6 +1,13 @@
 #!/bin/bash
 
 function cur_os {
+    # Make sure we have egrep
+    EGREP_VER=`egrep --version | head -n 1`
+    if [[ ! "$EGREP_VER" =~ "GNU grep" ]] ; then
+        # echo "egrep isn't installed, sorry."
+        # return 1
+        alias egrep='grep -e'
+    fi
 
     # If we have /etc/issue then it's not OSX:
     if [[ -r '/etc/issue' ]] ; then

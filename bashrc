@@ -46,6 +46,7 @@ END="\]"
 export PS1="[${SEQ}\$(if [[ \`whoami\` == 'root' ]]; then echo -n '31;1m'; else echo -n '0m'; fi;)${END}\u${SEQ}0m${END}@${SEQ}1;33m${END}\h${SEQ}0m${END} ${SEQ}1;35m${END}\w${SEQ}0m${END}]
 $ "
 
+# echo "OS = $OS"
 # Bash options:
 if [[ $SHELL == *bash ]]; then
     if [[ $OS ==  "osx" ]]; then
@@ -79,12 +80,14 @@ function ff() { find . -type f -iname '*'$*'*' -ls ; }
 # Import dev and devhome commands:
 source ~/.dotfiles/lib/dev_support.sh
 
-
 if [ $OS == "osx" ]; then
     # Alias mvim to gvim
     if [ $(which mvim) ]; then
         alias gvim=mvim
     fi
+
+    source $(brew --prefix)/bin/virtualenvwrapper.sh
+    # echo 'mac'
 
     # Mac utility functions:
 
@@ -167,15 +170,20 @@ END
     # Enable AirDrop over Ethernet and on unsupported Macs running Lion
     defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-    alias myip="ifconfig | egrep 'inet ' | sed -En '/inet 127/d;s/.* ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+) .*/\1/g;p'"
+    alias myip="ifconfig | grep -e 'inet ' | sed -En '/inet 127/d;s/.* ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+) .*/\1/g;p'"
 
-    if [ -f `brew --prefix`/etc/bash_completion ]; then
-        . `brew --prefix`/etc/bash_completion
+    if [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    elif [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
     fi
 
     # Git autocomplete:
-    [ -f /usr/local/git/contrib/completion/git-completion.bash ] && . /usr/local/git/contrib/completion/git-completion.bash
+    [ -f $(brew --prefix)/git/contrib/completion/git-completion.bash ] \
+        && . $(brew --prefix)/git/contrib/completion/git-completion.bash
+
 fi
+
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Xmx1g'
 
 source /usr/local/bin/virtualenvwrapper_lazy.sh
@@ -188,3 +196,8 @@ alias gcom='git commit'
 alias gpul='git pull --rebase'
 alias gpus='git push'
 alias gl='git lg'
+
+export CHROME_BIN="/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome"
+
+# alias pirate='ssh -C2qTnN -D 9999 server & && /Applications/Firefox.app/Contents/MacOS/firefox -new-instance -safe-mode http://thepiratebay.se'
+complete -C aws_completer aws

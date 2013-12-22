@@ -58,3 +58,5 @@ let g:pymode_folding = 0
 augroup filetypedetect
     autocmd BufNew,BufNewFile,BufRead *.txt,*.text,*.md,*.markdown :setfiletype markdown
 augroup END
+
+set synmaxcol=50000

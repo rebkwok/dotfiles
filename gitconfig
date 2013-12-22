@@ -1,21 +1,47 @@
 [user]
-	name = Mark Smith
-	email = mark.smith@fanduel.com
+    name = Mark Smith
+    email = mark.smith@practicalpoetry.co.uk
+
 [push]
 	default = simple
+
 [core]
     editor = vim
+    excludesfile = ~/.gitignore
+    whitespace = space-before-tab,trailing-space
+
 [web]
     browser = chr
+
 [browser "chr"]
 	cmd = /usr/bin/open -a '/Applications/Google Chrome.app'
+
 [help]
 	format = web
-[color]
-	diff = auto
-	status = auto
-	branch = auto
+
 [branch]
     autosetuprebase = always
+
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    au = add -u
+
+[color]
+    ui = true
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
