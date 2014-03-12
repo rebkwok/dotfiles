@@ -10,6 +10,8 @@ au BufRead,BufNewFile Makefile*	set ts=4 sw=4 noexpandtab nosmartindent
 
 au BufRead,BufNewFile *.coffee	set ts=4 sw=4 expandtab smartindent
 au BufRead,BufNewFile *.jss     set ts=4 sw=4 expandtab smartindent
+au BufRead,BufNewFile *.js      set ts=4 sw=4 noexpandtab smartindent
+au BufRead,BufNewFile *.prolog  set ft=prolog
 
 " Use the below highlight group when displaying bad whitespace is desired.
 highlight BadWhitespace ctermbg=red guibg=red
@@ -60,3 +62,5 @@ augroup filetypedetect
 augroup END
 
 set synmaxcol=50000
+set ruler
+

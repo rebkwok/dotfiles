@@ -29,3 +29,5 @@ pip-log.txt
 .dev_activate
 bin/mvim
 *.swp
+vim/.netrwhist
+bin/krenew
