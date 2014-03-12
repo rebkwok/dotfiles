@@ -268,17 +268,16 @@ alias gcom='git commit'
 alias gpul='git pull --rebase'
 alias gpus='git push'
 alias gl='git lg'
-<<<<<<< HEAD
 
 export CHROME_BIN="/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome"
 
 # alias pirate='ssh -C2qTnN -D 9999 server & && /Applications/Firefox.app/Contents/MacOS/firefox -new-instance -safe-mode http://thepiratebay.se'
 complete -C aws_completer aws
-=======
+
 alias glog='gl'
 alias gs='git status'
 alias gstat='gs'
 
 # Fix for vagrant not coming up after restart:
 alias fix-vagrant='sudo /Library/StartupItems/VirtualBox/VirtualBox restart'
->>>>>>> Various updates.
+
