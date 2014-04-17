@@ -101,7 +101,7 @@ pool.add_class('_', '_', "underscore")
 pool.add_class('-', '-', "hyphen")
 
 
-DEFAULT_PATTERN = "UUdddlll"
+DEFAULT_PATTERN = "SSSS-dddd-ssss"
 
 
 def generate_password(pattern=DEFAULT_PATTERN):
