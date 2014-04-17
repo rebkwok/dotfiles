@@ -254,6 +254,9 @@ END
     [ -f $(brew --prefix)/git/contrib/completion/git-completion.bash ] \
         && . $(brew --prefix)/git/contrib/completion/git-completion.bash
 
+    alias ting='afplay ~/.dotfiles/sound/ting.wav'
+    alias airhorn='afplay ~/.dotfiles/sound/airhorn.wav'
+    alias fail='afplay ~/.dotfiles/sound/fail.wav'
 fi
 
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Xmx1g'
