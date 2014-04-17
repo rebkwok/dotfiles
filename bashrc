@@ -4,6 +4,7 @@ PATH=$HOME/bin:$PATH
 PATH=/Users/mark.smith/.gem/ruby/1.8/bin:$PATH
 PATH=/usr/local/Cellar/ruby/2.0.0-p353/bin/:$PATH
 PATH=/usr/local/share/npm/bin:$PATH:
+#PATH=/Users/mark/.rvm/gems/ruby-2.0.0-p353/bin:/usr/local/share/python:$PATH
 export PATH
 
 export EDITOR=vim
