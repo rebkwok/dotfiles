@@ -255,6 +255,7 @@ END
     [ -f $(brew --prefix)/git/contrib/completion/git-completion.bash ] \
         && . $(brew --prefix)/git/contrib/completion/git-completion.bash
 
+
     alias ting='afplay ~/.dotfiles/sound/ting.wav'
     alias airhorn='afplay ~/.dotfiles/sound/airhorn.wav'
     alias fail='afplay ~/.dotfiles/sound/fail.wav'
@@ -281,7 +282,3 @@ complete -C aws_completer aws
 alias glog='gl'
 alias gs='git status'
 alias gstat='gs'
-
-# Fix for vagrant not coming up after restart:
-alias fix-vagrant='sudo /Library/StartupItems/VirtualBox/VirtualBox restart'
-
