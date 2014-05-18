@@ -2,7 +2,7 @@
 
 PYTHON=/usr/local/bin/python
 
-brew install ack bash-completion python \
+brew install ack bash-completion python ssh-copy-id\
 && sudo pip install -U distribute pip virtualenv virtualenvwrapper bpython ipython awscli \
 && brew install macvim
 
