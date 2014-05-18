@@ -146,6 +146,11 @@ alias curl_json="curl -H 'Accept: application/json'"
 if [[ $(which ack-grep) ]]; then
     alias ack='ack-grep'
 fi
+
+if [[ $(which hub) ]]; then
+    alias git='hub'
+fi
+
 # Find a file with a pattern in name:
 function ff() { find . -type f -iname '*'$*'*' -ls ; }
 
@@ -274,7 +279,7 @@ alias gpul='git pull --rebase'
 alias gpus='git push'
 alias gl='git lg'
 
-export CHROME_BIN="/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome"
+export CHROME_BIN="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 # alias pirate='ssh -C2qTnN -D 9999 server & && /Applications/Firefox.app/Contents/MacOS/firefox -new-instance -safe-mode http://thepiratebay.se'
 complete -C aws_completer aws
