@@ -25,7 +25,7 @@ set encoding=utf-8
 let python_highlight_all=1
 
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 
 " Split pane navigation:
 map <c-Down> <c-w>j
