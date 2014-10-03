@@ -13,7 +13,7 @@ brew tap phinze/cask \
     brew cask install iterm2 google-chrome keepassx dropbox 
 
     # Utilities:
-    brew cask install adium calibre caffeine cyberduck f-lux tor-browser transmission truecrypt vlc
+    brew cask install adium calibre caffeine cyberduck flux tor-browser transmission truecrypt vlc
 
     # Dev Tools:
     brew cask install pycharm-pro diffmerge virtualbox vagrant
