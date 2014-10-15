@@ -254,6 +254,8 @@ END
     [ -f $(brew --prefix)/git/contrib/completion/git-completion.bash ] \
         && . $(brew --prefix)/git/contrib/completion/git-completion.bash
 
+    alias full_volume='osascript -e "set Volume 10"'
+    alias silence='osascript -e "set Volume 0"'
 
     alias ting='afplay ~/.dotfiles/sound/ting.wav'
     alias airhorn='afplay ~/.dotfiles/sound/airhorn.wav'
