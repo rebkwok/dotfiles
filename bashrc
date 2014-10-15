@@ -257,9 +257,10 @@ END
     alias full_volume='osascript -e "set Volume 10"'
     alias silence='osascript -e "set Volume 0"'
 
-    alias ting='afplay ~/.dotfiles/sound/ting.wav'
-    alias airhorn='afplay ~/.dotfiles/sound/airhorn.wav'
-    alias fail='afplay ~/.dotfiles/sound/fail.wav'
+    alias ting='full_volume && afplay ~/.dotfiles/sound/ting.wav'
+    alias airhorn='full_volume && afplay ~/.dotfiles/sound/airhorn.wav'
+    alias fail='full_volume && afplay ~/.dotfiles/sound/fail.wav'
+    alias mou='open -a Mou'
 fi
 
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Xmx1g'
