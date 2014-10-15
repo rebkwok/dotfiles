@@ -9,6 +9,10 @@ Install with::
 
     curl https://raw.github.com/bedmondmark/dotfiles/master/setup/bootstrap.sh | bash -x
 
+Install vim plugins with::
+
+    git submodules init && git submodules update
+
 ToDo
 ----
 
