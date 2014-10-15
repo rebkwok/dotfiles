@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.5
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """ Generate random passwords using the platform's built-in random
@@ -43,7 +43,7 @@ class CharacterPool(object):
 
     def choice(self, pattern_char):
         return self._pool[pattern_char].choice()
-        
+
     def validate_pattern(self, pattern):
         """Validate the provided pattern string to ensure that all characters
         are valid.
@@ -75,6 +75,17 @@ PUNCTUATION = r"!@#$%^&*<>,.+(){}?=/\|:;_-~ "
 CAPITAL_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 LOWER_LETTERS = "abcdefghijklmnopqrstuvwxyz"
 NUMBERS = "0123456789"
+
+KEYBOARDS = {
+    'qwerty': {
+        'left': "qwertasdfgzxcv"
+        'right': "yuiophjklbnm"
+    },
+    'dvorak': {
+        'left': "pyaoeuiqjkx"
+        'right': "fgcrldhtnsbmwvz"
+    },
+}
 
 pool = CharacterPool()
 pool.add_class('p$', PUNCTUATION, "punctuation")
