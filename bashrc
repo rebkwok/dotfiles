@@ -284,3 +284,16 @@ complete -C aws_completer aws
 alias glog='gl'
 alias gs='git status'
 alias gstat='gs'
+
+alias p='python'
+alias p3='python3'
+
+# added by travis gem
+[ -f /Users/mark/.travis/travis.sh ] && source /Users/mark/.travis/travis.sh
+
+# Pyenv config
+if which pyenv > /dev/null; then
+    export PYENV_ROOT=/usr/local/opt/pyenv
+    eval "$(pyenv init -)"
+fi
+
