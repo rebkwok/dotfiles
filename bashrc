@@ -229,12 +229,6 @@ END
       
     # OSX Stuff:
     #
-    # Disable the Ping sidebar in iTunes
-    defaults write com.apple.iTunes disablePingSidebar -bool true
-
-    # Disable all the other Ping stuff in iTunes
-    defaults write com.apple.iTunes disablePing -bool true
-
     # Enable Safari’s debug menu
     defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
