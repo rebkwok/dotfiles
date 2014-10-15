@@ -11,3 +11,10 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# Created by dev-support
+.dev_activate
+
+# Python stuff
+venv
+*.pyc
