@@ -3,6 +3,10 @@ filetype off
 " call pathogen#helptags()
 call pathogen#infect()
 
+filetype plugin indent off
+set runtimepath+=/usr/local/go/misc/vim
+filetype plugin indent on
+
 set modelines=5
 set ts=4 sw=4 expandtab smartindent
 
@@ -12,6 +16,13 @@ au BufRead,BufNewFile *.coffee	set ts=4 sw=4 expandtab smartindent
 au BufRead,BufNewFile *.jss     set ts=4 sw=4 expandtab smartindent
 au BufRead,BufNewFile *.js      set ts=4 sw=4 noexpandtab smartindent
 au BufRead,BufNewFile *.prolog  set ft=prolog
+au BufRead,BufNewFile Vagrantfile  set ft=ruby
+
+au BufRead,BufNewFile *.go set nu
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
 
 " Use the below highlight group when displaying bad whitespace is desired.
 highlight BadWhitespace ctermbg=red guibg=red
