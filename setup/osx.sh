@@ -3,7 +3,7 @@
 PYTHON=/usr/local/bin/python
 
 brew install ack bash-completion python ssh-copy-id\
-&& sudo pip install -U distribute pip virtualenv virtualenvwrapper bpython ipython awscli \
+&& sudo pip install -U setuptools pip virtualenv virtualenvwrapper "ipython[notebook]" awscli \
 && brew install macvim
 
 # Install Homebrew Cask:
