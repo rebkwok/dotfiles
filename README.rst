@@ -18,8 +18,6 @@ ToDo
 
 * Better backup of existing dotfiles (re-runs don't lose existing backups).
 * Indempotent install/bootstrap scripts (unless deps have been updated).
-* Symlink binaries into ~/bin, so they can co-exist with
-  locally-installed binaries.
 * Automatic keygen, if necessary, and registration with github(?)
 * Separation of scripts into separate files, joined on install/runtime based
   on selected profile. (Basically this becomes modularisation of the dotfiles.)
