@@ -182,8 +182,6 @@ if [ $OS == "osx" ]; then
 END
         )"
 
-
-
         if [[ -n "${thePath%/*}" ]]; then
 
             if [[ -d "$thePath" ]]; then
