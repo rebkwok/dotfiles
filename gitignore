@@ -22,3 +22,6 @@ venv
 # Vim
 *.swp
 *.swo
+
+.idea
+.ropeproject
