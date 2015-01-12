@@ -12,7 +12,7 @@ function cur_os {
 
         # Run checks
         DEB_OS=`egrep -i 'Ubuntu|Debian' /etc/issue`
-        RH_OS=`egrep -i 'CentOS|Red Hat' /etc/issue`
+        RH_OS=`egrep -i 'CentOS|Red Hat|Fedora' /etc/issue`
         if [[ ${#DEB_OS} -gt 0 ]] ; then
             CUR_OS="debian"
         elif [[ ${#RH_OS} -gt 0 ]] ; then
