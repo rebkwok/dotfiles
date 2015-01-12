@@ -295,3 +295,5 @@ if which pyenv > /dev/null; then
     eval "$(pyenv init -)"
 fi
 
+GPG_TTY=$(tty)
+export GPG_TTY
