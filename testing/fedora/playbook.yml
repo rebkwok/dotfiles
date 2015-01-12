@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+  - name: DEPLOY!
+    shell: cat /dotfiles/setup/bootstrap.sh | bash -x

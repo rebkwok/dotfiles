@@ -143,11 +143,11 @@ alias ...="cd ../.."
 alias svnignore="svn propedit svn:ignore ."
 alias curl_json="curl -H 'Accept: application/json'"
 
-if [[ $(which ack-grep) ]]; then
+if [[ $(which ack-grep 2> /dev/null) ]]; then
     alias ack='ack-grep'
 fi
 
-if [[ $(which hub) ]]; then
+if [[ $(which hub 2> /dev/null) ]]; then
     alias git='hub'
 fi
 
@@ -159,11 +159,11 @@ source ~/.dotfiles/lib/dev_support.sh
 
 if [ $OS == "osx" ]; then
     # Alias mvim to gvim
-    if [ $(which mvim) ]; then
+    if [ $(which mvim 2> /dev/null) ]; then
         alias gvim=mvim
     fi
 
-    source $(brew --prefix)/bin/virtualenvwrapper.sh
+    # source $(brew --prefix)/bin/virtualenvwrapper_lazy.sh
     # echo 'mac'
 
     # Mac utility functions:
@@ -263,7 +263,9 @@ fi
 
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Xmx1g'
 
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+if [ -f $(which virtualenvwrapper_lazy.sh 2> /dev/null) ]; then
+    source $(which virtualenvwrapper_lazy.sh 2> /dev/null)
+fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
@@ -290,7 +292,7 @@ alias p3='python3'
 [ -f /Users/mark/.travis/travis.sh ] && source /Users/mark/.travis/travis.sh
 
 # Pyenv config
-if which pyenv > /dev/null; then
+if which pyenv 2> /dev/null; then
     export PYENV_ROOT=/usr/local/opt/pyenv
     eval "$(pyenv init -)"
 fi

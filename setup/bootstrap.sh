@@ -33,23 +33,42 @@ function cur_os {
 
 OS=`cur_os`
 
+if [ $DEBUG ];
+then
+    CLONE='cp -r /dotfiles .dotfiles'
+else
+    CLONE='git clone git://github.com/bedmondmark/dotfiles.git ~/.dotfiles'
+fi
+
+now=$(date +"%Y-%m-%d-%s")
+BACKUP_DIR="/tmp/dotfile_backups.$now"
+
+function backup {
+    for src in $@; do
+        if [ -f $src ]; then
+            echo 'backing up' $src to $BACKUP_DIR/$(basename $src)
+        fi
+    done
+    exit
+}
+
 if [[ "$OS" == "debian" ]]
 then
 	echo 'Going with a Debian-style install'
 	sudo apt-get install -y git \
-        && git clone git://github.com/bedmondmark/dotfiles.git ~/.dotfiles \
+        &&  $CLONE \
 	&& . ~/.dotfiles/setup/debian.sh \
-	&& mkdir /tmp/dotfile_backups \
-	&& mv ~/.bashrc ~/.profile /tmp/dotfile_backups \
+	&& mkdir $BACKUP_DIR \
+    && backup ~/.bashrc ~/.profile ~/.bash_profile \
 	&& . ~/.dotfiles/install.sh
 elif [[ "$OS" == "redhat" ]]
 then
 	echo 'Going with a Fedora-style install'
 	sudo yum install -y git \
-        && git clone git://github.com/bedmondmark/dotfiles.git ~/.dotfiles \
+        && $CLONE \
 	&& . ~/.dotfiles/setup/fedora.sh \
-	&& mkdir /tmp/dotfile_backups \
-	&& mv ~/.bashrc ~/.profile /tmp/dotfile_backups \
+	&& mkdir $BACKUP_DIR \
+    && backup ~/.bashrc ~/.profile ~/.bash_profile \
 	&& . ~/.dotfiles/install.sh
 elif [[ "$OS" == "osx" ]]
 then
@@ -57,10 +76,10 @@ then
 	
 	ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go/install)" \
 	&& brew install git \
-        && git clone git://github.com/bedmondmark/dotfiles.git ~/.dotfiles \
+        && $CLONE \
 	&& . ~/.dotfiles/setup/osx.sh \
-	&& mkdir /tmp/dotfile_backups \
-	&& mv ~/.bashrc ~/.profile /tmp/dotfile_backups \
+	&& mkdir $BACKUP_DIR \
+    && backup ~/.bashrc ~/.profile ~/.bash_profile \
 	&& . ~/.dotfiles/install.sh
 else
 	echo "Don't know what the hell OS this is"
