@@ -142,6 +142,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias svnignore="svn propedit svn:ignore ."
 alias curl_json="curl -H 'Accept: application/json'"
+# du - sorted by size:
+alias dus="du -hs * | gsort -h"
 
 if [[ $(which ack-grep 2> /dev/null) ]]; then
     alias ack='ack-grep'
@@ -292,7 +294,7 @@ alias p3='python3'
 [ -f /Users/mark/.travis/travis.sh ] && source /Users/mark/.travis/travis.sh
 
 # Pyenv config
-if which pyenv 2> /dev/null; then
+if which pyenv 2>&1 > /dev/null; then
     export PYENV_ROOT=/usr/local/opt/pyenv
     eval "$(pyenv init -)"
 fi
