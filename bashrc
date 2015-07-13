@@ -16,17 +16,17 @@ if [[ $- != *i* ]] ; then
 fi
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
+if [[ -f /etc/bashrc ]]; then
     . /etc/bashrc
 fi
 # Ubuntu:
-if [ -f /etc/bash.bashrc ]; then
+if [[ -f /etc/bash.bashrc ]]; then
     . /etc/bash.bashrc
 fi
 
 . ~/.dotfiles/shell_init.sh
 
-if [ -f ~/.local.sh ]; then
+if [[ -f ~/.local.sh ]]; then
     . ~/.local.sh
 fi
 
@@ -72,18 +72,18 @@ fi
 
 # Git branch details
 function parse_git_dirty() {
-        [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
+    [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
 }
 function parse_git_branch() {
-        git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
 # Change this symbol to something sweet. 
 # (http://en.wikipedia.org/wiki/Unicode_symbols)
 symbol="➤ "
 
-export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([ -n \$(git branch 2> /dev/null) ] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n$symbol\[$RESET\]"
-export PS2="\[$ORANGE\]→ \[$RESET\]"
+export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n$symbol\[$RESET\]"
+#export PS2="\[$ORANGE\]→ \[$RESET\]"
 
 
 ### Misc
