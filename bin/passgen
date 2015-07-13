@@ -78,12 +78,12 @@ NUMBERS = "0123456789"
 
 KEYBOARDS = {
     'qwerty': {
-        'left': "qwertasdfgzxcv"
-        'right': "yuiophjklbnm"
+        'left': "qwertasdfgzxcv",
+        'right': "yuiophjklbnm",
     },
     'dvorak': {
-        'left': "pyaoeuiqjkx"
-        'right': "fgcrldhtnsbmwvz"
+        'left': "pyaoeuiqjkx",
+        'right': "fgcrldhtnsbmwvz",
     },
 }
 
@@ -124,7 +124,7 @@ def generate_password(pattern=DEFAULT_PATTERN):
 
 def random_pattern(length, letter):
     return letter * length
-    
+
 def main(argv=sys.argv[1:]):
     """Parse user command line, and print out the specified number of matching
     generated passwords.
@@ -144,12 +144,12 @@ def main(argv=sys.argv[1:]):
           help="""The length of the pattern used if a random password pattern is
           generated [%default]""")
     options, args = optp.parse_args(argv)
-   
+
     if options.pattern is None:
         pattern = DEFAULT_PATTERN
     else:
         pattern = options.pattern
-    
+
     # pylint: disable-msg=W0612
     for i in range(options.number):
         if options.random:
