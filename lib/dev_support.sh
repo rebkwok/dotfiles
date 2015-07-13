@@ -33,7 +33,7 @@ _dev_gethome()
 # DEV_HOME, and run its .dev_activate script
 function devhome ()
 {
-    if [[ $1 ]]; then
+    if [[ -n "$1" ]]; then
         _dev_addhome "$1" "$(pwd)"
     fi
     pwd > ~/.current_dev_dir
@@ -53,14 +53,15 @@ function devlook () {
 # Move to the current DEV_HOME directory and
 # run its local .dev_activate script.
 function dev () {
-    if [[ $1 ]]; then
+    if [[ -n $1 ]]; then
         home=$(_dev_gethome "$1")
-        if [[ $home ]]; then
-            echo $home > ~/.current_dev_dir && dev
+        if [[ -n "$home" ]]; then
+            echo $home > ~/.current_dev_dir \
+                && dev
         else
             echo "Unknown dev name!"
         fi
-    elif [ -f ~/.current_dev_dir ]; then
+    elif [[ -f ~/.current_dev_dir ]]; then
         devlook
         export DEV_HOME="`cat ~/.current_dev_dir`"
         cd "$DEV_HOME"
@@ -78,7 +79,7 @@ function undev () {
 
 # Activate the current directory.
 function devactivate() {
-    if [ -f .dev_activate ]; then
+    if [[ -f ".dev_activate" ]]; then
         echo 'Running .dev_activate file'
         source .dev_activate
     fi
@@ -103,7 +104,7 @@ function devlist() {
             printf(fmt, k, keys[k])
         }
     }
-    ' ~/.devhomes
+    ' ~/.devhomes | sort
 }
 
 # Bash completion function:
@@ -118,5 +119,4 @@ _dev()
     COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
     return 0
 }
-complete -F _dev dev
-
+[[ "$SHELL" == "/bin/bash" ]] && complete -F _dev dev
