@@ -37,7 +37,7 @@ if [ $DEBUG ];
 then
     CLONE='cp -r /dotfiles .dotfiles'
 else
-    CLONE='git clone git://github.com/bedmondmark/dotfiles.git ~/.dotfiles'
+    CLONE='git clone git://github.com/rebkwok/dotfiles.git ~/.dotfiles'
 fi
 
 now=$(date +"%Y-%m-%d-%s")

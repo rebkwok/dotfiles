@@ -4,6 +4,10 @@ PATH=$HOME/bin:$PATH
 PATH=/usr/local/share/npm/bin:$PATH:
 export PATH
 
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/projects
+source /usr/local/bin/virtualenvwrapper.sh
+
 export EDITOR=vim
 
 . ~/.dotfiles/lib/detect.sh
@@ -78,17 +82,28 @@ function parse_git_branch() {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
-# Change this symbol to something sweet. 
+# Mercurial branch details
+function hg_branch() {
+    hg branch 2> /dev/null | awk '{print $1}'
+}
+function hg_bookmark() {
+    hg bookmarks 2> /dev/null | awk '/\*/ { print $2 }'
+}
+
+# Change this symbol to something sweet.
 # (http://en.wikipedia.org/wiki/Unicode_symbols)
 symbol="➤ "
 
-export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n$symbol\[$RESET\]"
-#export PS2="\[$ORANGE\]→ \[$RESET\]"
+export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]in "
+export PS1="$PS1\[$GREEN\]\w\[$WHITE\]\$([[ -n \$((git branch 2> /dev/null) || (hg branch 2> /dev/null)) ]] && echo \" on \")"
+export PS1="$PS1\[$PURPLE\]\$(parse_git_branch)\$([[ -n \$(git branch 2> /dev/null) ]] && echo \"(git) \")"
+export PS1="$PS1\[$ORANGE\]\$(hg_branch)\$([[ -n \$(hg branch 2> /dev/null) ]] && echo \" (hg)\")\[$WHITE\]\$([[ -n \$(hg branch 2> /dev/null) ]] && echo \" at \")\[$MAGENTA\]\$(hg_bookmark)"
+export PS1="$PS1\[$WHITE\]\n$symbol\[$RESET\]"
 
 
 ### Misc
 
-# Only show the current directory's name in the tab 
+# Only show the current directory's name in the tab
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 # Bash options:
 if [ "$SHELL" = "/bin/bash" ]; then
@@ -107,6 +122,9 @@ if [ -f /etc/bash_completion ]; then
 elif [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
+
+# Aliases
+. ~/.aliases.sh
 
 # ----------------------------------------------------------------------------
 # Port to zsh:

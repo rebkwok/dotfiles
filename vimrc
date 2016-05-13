@@ -1,7 +1,7 @@
 filetype off
 " call pathogen#runtime_append_all_bundles()
 " call pathogen#helptags()
-call pathogen#infect()
+" call pathogen#infect()
 
 filetype plugin indent off
 set runtimepath+=/usr/local/go/misc/vim
@@ -63,6 +63,6 @@ augroup END
 
 set synmaxcol=50000
 set ruler
-
+set number
 
 autocmd filetype crontab setlocal nobackup nowritebackup

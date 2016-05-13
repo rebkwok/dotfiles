@@ -27,3 +27,4 @@ pip-log.txt
 sdist
 var
 vim/.netrwhist
+.idea/
