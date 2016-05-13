@@ -97,7 +97,7 @@ symbol="➤ "
 export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]in "
 export PS1="$PS1\[$GREEN\]\w\[$WHITE\]\$([[ -n \$((git branch 2> /dev/null) || (hg branch 2> /dev/null)) ]] && echo \" on \")"
 export PS1="$PS1\[$PURPLE\]\$(parse_git_branch)\$([[ -n \$(git branch 2> /dev/null) ]] && echo \"(git) \")"
-export PS1="$PS1\[$ORANGE\]\$(hg_branch)\$([[ -n \$(hg branch 2> /dev/null) ]] && echo \" (hg)\")\[$WHITE\]\$([[ -n \$(hg branch 2> /dev/null) ]] && echo \" at \")\[$MAGENTA\]\$(hg_bookmark)"
+export PS1="$PS1\[$ORANGE\]\$(hg_branch)\$([[ -n \$(hg branch 2> /dev/null) ]] && echo \" (hg)\")\[$WHITE\]\$([[ -n \$(hg_bookmark) ]] && echo \" at \")\[$MAGENTA\]\$(hg_bookmark)"
 export PS1="$PS1\[$WHITE\]\n$symbol\[$RESET\]"
 
 
