@@ -4,15 +4,21 @@
 # User specific environment and startup programs
 
 PATH=$PATH:$HOME/bin
-PATH=$PATH:/usr/local/share/npm/bin
-PATH="$PATH:/usr/local/heroku/bin"
+
+# Setting PATH for Python
+# The original version is saved in .bash_profile.pysave
+PATH=$(pyenv root)/shims:$PATH
+export PATH
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
 
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
 export PATH

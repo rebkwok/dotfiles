@@ -4,9 +4,15 @@ PATH=$HOME/bin:$PATH
 PATH=/usr/local/share/npm/bin:$PATH:
 export PATH
 
+# assuming pyenv
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
-source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=$HOME/.pyenv/shims/python3.8
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+pyenv virtualenvwrapper
+# this breaks bash
+# source /Users/becky/.pyenv/shims/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 
 export EDITOR=vim
 
@@ -44,7 +50,7 @@ elif infocmp xterm-256color >/dev/null 2>&1; then
         export TERM=xterm-256color
 fi
 
-if tput setaf 1 >/dev/null 2>1; then
+if tput setaf 1 >/dev/null 2>&1; then
         tput sgr0
         if [ $(tput colors) -ge 256 ] 2>/dev/null; then
                 BLACK=$(tput setaf 190)

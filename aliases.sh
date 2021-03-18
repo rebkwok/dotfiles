@@ -18,19 +18,13 @@ alias curl_json="curl -H 'Accept: application/json'"
 alias dus="du -hs * | gsort -h"
 
 # Git aliases
-alias gadd='git add'
-alias gcom='git commit'
-alias gco='git commit'
+alias ga='git add'
+alias gco='git checkut'
 alias gpull='git pull --rebase'
 alias gpush='git push'
 alias gl='git log'
 alias gd='git diff'
-
-alias glog='gl'
 alias gs='git status'
-alias gstat='gs'
-alias ga='gadd'
-alias gcm='gcom'
 alias p='python'
 alias p3='python3'
 
