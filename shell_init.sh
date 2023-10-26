@@ -29,8 +29,6 @@ if [ "$OS" = "osx" ]; then
 
     # OSX Stuff:
     #
-    # Enable Safari’s debug menu
-    defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
     # Enable subpixel font rendering on non-Apple LCDs
     defaults write NSGlobalDomain AppleFontSmoothing -int 2

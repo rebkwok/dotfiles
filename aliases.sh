@@ -28,10 +28,3 @@ alias gs='git status'
 alias p='python'
 
 
-if [[ `which ack-grep 2> /dev/null` != "" ]]; then
-    alias ack='ack-grep'
-fi
-
-if [[ `which hub 2> /dev/null` != "" ]]; then
-    alias git='hub'
-fi
