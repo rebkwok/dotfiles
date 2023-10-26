@@ -1,5 +1,0 @@
-#!/bin/bash
-echo 'Killall'
-sudo killall -HUP mDNSResponder
-echo 'flushcache'
-sudo dscacheutil -flushcache

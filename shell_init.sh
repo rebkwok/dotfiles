@@ -13,11 +13,6 @@ if [ -f ~/.local.sh ]; then
     . ~/.local.sh
 fi
 
-if [ -f ~/bin/fasd ]; then
-    eval "$(~/bin/fasd --init auto)"
-    alias v='f -e vim' # quick opening files with vim
-fi
-
 # Set a prompt that goes red when logged-in as root:
 SEQ="\[\033["
 END="\]"
@@ -31,10 +26,6 @@ END="\]"
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 
 if [ "$OS" = "osx" ]; then
-    # Alias mvim to gvim
-    if [ $(which mvim 2> /dev/null) ]; then
-        alias gvim=mvim
-    fi
 
     # OSX Stuff:
     #
@@ -60,20 +51,11 @@ if [ "$OS" = "osx" ]; then
     alias fail='full_volume && afplay ~/.dotfiles/sound/fail.wav'
 fi
 
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Xmx1g'
-
-if [ -f $(which virtualenvwrapper_lazy.sh 2> /dev/null) ]; then
-    . $(which virtualenvwrapper_lazy.sh 2> /dev/null)
-fi
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-# added by travis gem
-[ -f /Users/mark/.travis/travis.sh ] && . /Users/mark/.travis/travis.sh
 
 # Pyenv config
 if which pyenv 2>&1 > /dev/null; then
-    export PYENV_ROOT=/usr/local/opt/pyenv
+    export PYENV_ROOT="$HOME/.pyenv"
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
 fi
 

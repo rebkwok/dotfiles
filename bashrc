@@ -5,14 +5,7 @@ PATH=/usr/local/share/npm/bin:$PATH:
 export PATH
 
 # assuming pyenv
-export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
-export VIRTUALENVWRAPPER_PYTHON=$HOME/.pyenv/shims/python3.8
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-pyenv virtualenvwrapper
-# this breaks bash
-# source /Users/becky/.pyenv/shims/virtualenvwrapper.sh
-# source /usr/local/bin/virtualenvwrapper.sh
 
 export EDITOR=vim
 
@@ -88,14 +81,6 @@ function parse_git_branch() {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
-# Mercurial branch details
-function hg_branch() {
-    hg branch 2> /dev/null | awk '{print $1}'
-}
-function hg_bookmark() {
-    hg bookmarks 2> /dev/null | awk '/\*/ { print $2 }'
-}
-
 # Change this symbol to something sweet.
 # (http://en.wikipedia.org/wiki/Unicode_symbols)
 symbol="➤ "
@@ -120,15 +105,6 @@ if [ "$SHELL" = "/bin/bash" ]; then
     fi
 fi
 
-# Import dev and devhome commands:
-. ~/.dotfiles/lib/dev_support.sh
-
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-elif [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-fi
-
 pyclean () {
         find . -type f -name "*.py[co]" -delete
         find . -type d -name "__pycache__" -delete
@@ -143,5 +119,3 @@ pyclean () {
 # Find a file with a pattern in name:
 function ff() { find . -type f -iname '*'$*'*' -ls ; }
 
-# Import dev and devhome commands:
-. ~/.dotfiles/lib/dev_support.sh
