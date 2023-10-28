@@ -19,12 +19,13 @@ alias dus="du -hs * | gsort -h"
 
 # Git aliases
 alias ga='git add'
-alias gco='git checkut'
+alias gco='git checkout'
 alias gpull='git pull --rebase'
 alias gpush='git push'
 alias gl='git log'
 alias gd='git diff'
 alias gs='git status'
+alias gcm='git commit'
 alias p='python'
 
-
+alias kp=kpcli
