@@ -28,4 +28,16 @@ alias gs='git status'
 alias gcm='git commit'
 alias p='python'
 
-alias kp=kpcli
+function kp() {
+  cmd="$1"
+  
+  if [ -z cmd ]; then
+    shift 1; 
+    keepassxc-cli "$cmd" "/Users/becky/Google Drive/My Drive/keepass/becky.kdbx" "$@"
+  else  
+    keepassxc-cli -h
+  fi
+}
+
+
+alias va='. .venv/bin/activate'
